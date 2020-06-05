@@ -1,32 +1,31 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app>
+    <component :is="layout">
+      <router-view></router-view>
+    </component>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<script>
+const default_layout = "app";
 
-#nav {
-  padding: 30px;
-}
+export default {
+  name: "App",
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
+  computed: {
+    layout() {
+      // console.log(`Layout : ${this.$route.meta.layout || default_layout}-layout`)
+      return (this.$route.meta.layout || default_layout) + "-layout";
+    },
+  },
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+  components: {
+  },
+
+  props: {
+    source: String,
+  },
+
+  data: () => ({}),
+};
+</script>
